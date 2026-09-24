@@ -1,8 +1,7 @@
 package io.github.lounode.extrabotany.common.item.relic;
-import io.github.lounode.extrabotany.xplat.EXplatAbstractions;
 
-import net.minecraft.Util;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -18,8 +17,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -30,8 +29,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 
-import org.jetbrains.annotations.Nullable;
-
 import vazkii.botania.api.internal.ManaBurst;
 import vazkii.botania.api.item.Relic;
 import vazkii.botania.api.mana.BurstProperties;
@@ -39,7 +36,6 @@ import vazkii.botania.api.mana.LensEffectItem;
 import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.common.entity.ManaBurstEntity;
 import vazkii.botania.common.helper.PlayerHelper;
-import vazkii.botania.common.item.equipment.tool.bow.LivingwoodBowItem;
 import vazkii.botania.common.item.relic.RelicImpl;
 
 import io.github.lounode.extrabotany.api.entity.EntityNbtHelper;
@@ -47,15 +43,15 @@ import io.github.lounode.extrabotany.common.entity.MagicArrowEntity;
 import io.github.lounode.extrabotany.common.item.enchantment.ICustomEnchantable;
 import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
 import io.github.lounode.extrabotany.common.sounds.ExtraBotanySounds;
+import io.github.lounode.extrabotany.xplat.EXplatAbstractions;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 import static io.github.lounode.extrabotany.common.entity.MagicArrowEntity.TAG_DAMAGE;
 import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
 
-public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem, ICustomEnchantable {
+public class FailnaughtItem extends BowItem implements LensEffectItem, ICustomEnchantable {
 	private static final float ADVANCEMENT_REQUIRE = 100.0F;
 	private static final float ATTACK_BOX_RADIUS = 2.0F;
 	private static final int HIT_ENTITY_COST = 50;
@@ -311,11 +307,6 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem,
 			case 4 -> (int) (MANA_PER_USE_MAX[3] + (MANA_PER_USE_MAX[4] - MANA_PER_USE_MAX[3]) * tierProcess);
 			default -> 0;
 		};
-	}
-
-	@Override
-	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<Item> onBroken) {
-		return 0;
 	}
 
 	@Override

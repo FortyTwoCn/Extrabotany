@@ -9,18 +9,14 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import org.jetbrains.annotations.Nullable;
 
 import vazkii.botania.api.mana.ManaDiscountArmor;
-import vazkii.botania.api.mana.ManaItemHandler;
-import vazkii.botania.common.item.equipment.tool.ToolCommons;
 
 import io.github.lounode.extrabotany.api.ExtraBotanyAPI;
 import io.github.lounode.extrabotany.client.lib.ResourcesLib;
@@ -28,14 +24,12 @@ import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
 import io.github.lounode.extrabotany.common.item.equipment.armor.starry_idol.StarryIdolArmorItem;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
 
 public class OldExbotanyArmorItem extends StarryIdolArmorItem implements ManaDiscountArmor {
 	private static final int MANA_PER_DAMAGE = 70;
-	private static final int MANA_PER_REPAIR = MANA_PER_DAMAGE * 2;
 
 	public enum Variant {
 		MIKU("miku",
@@ -87,24 +81,8 @@ public class OldExbotanyArmorItem extends StarryIdolArmorItem implements ManaDis
 	}
 
 	@Override
-	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<Item> onBroken) {
-		return ToolCommons.damageItemIfPossible(stack, amount, entity, getManaPerDamage());
-	}
-
-	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
 		triggerAdvancement(entity);
-		tickOldManaRepair(stack, world, entity);
-	}
-
-	private void tickOldManaRepair(ItemStack stack, Level world, Entity entity) {
-		if (!(entity instanceof Player player) || world.isClientSide() || stack.getDamageValue() <= 0) {
-			return;
-		}
-
-		if (ManaItemHandler.instance().requestManaExact(stack, player, MANA_PER_REPAIR, true)) {
-			stack.setDamageValue(stack.getDamageValue() - 1);
-		}
 	}
 
 	@Override

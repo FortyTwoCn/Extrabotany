@@ -13,11 +13,12 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
+import vazkii.botania.common.component.BotaniaDataComponents;
+import vazkii.botania.common.component.ManaRepair;
 import vazkii.botania.common.item.BaubleBoxItem;
 import vazkii.botania.common.item.CustomCreativeTabContents;
 import vazkii.botania.common.item.lens.Lens;
 import vazkii.botania.common.item.lens.LensItem;
-import vazkii.botania.xplat.XplatAbstractions;
 
 import io.github.lounode.extrabotany.common.crafting.recipe.*;
 import io.github.lounode.extrabotany.common.item.brew.HolyWaterGrenadeItem;
@@ -40,12 +41,12 @@ import io.github.lounode.extrabotany.common.item.equipment.shield.ElementiumShie
 import io.github.lounode.extrabotany.common.item.equipment.shield.ManasteelShieldItem;
 import io.github.lounode.extrabotany.common.item.equipment.shield.TerrasteelShieldItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.BinderItem;
-import io.github.lounode.extrabotany.common.item.equipment.tool.MagicFingerItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.BottledPixieItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.BottledStarItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.CosmicCarKeyItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.FlamescionWeaponItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.KingGardenItem;
+import io.github.lounode.extrabotany.common.item.equipment.tool.MagicFingerItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.MotorItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.PhotonShotgunItem;
 import io.github.lounode.extrabotany.common.item.equipment.tool.RodOfDiscordItem;
@@ -63,7 +64,6 @@ import io.github.lounode.extrabotany.common.item.relic.*;
 import io.github.lounode.extrabotany.common.item.relic.void_archives.VoidArchivesItem;
 import io.github.lounode.extrabotany.common.item.relic.voidcore.CoreOfTheVoidItem;
 import io.github.lounode.extrabotany.common.lib.LibItemNames;
-import io.github.lounode.extrabotany.common.sounds.ExtraBotanySounds;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -74,6 +74,13 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
 
 public final class ExtraBotanyItems {
 	public static final Map<ResourceLocation, Item> ALL = new LinkedHashMap<>();
+	private static final int MANA_PER_DAMAGE_MANASTEEL = 60;
+	private static final int MANA_PER_DAMAGE_ELEMENTIUM = 70;
+	private static final int MANA_PER_DAMAGE_TERRASTEEL = 100;
+	private static final int MANA_PER_DAMAGE_GAIA = 200;
+	private static final int MANA_PER_DAMAGE_RHEIN = 300;
+	private static final int MANA_PER_DAMAGE_ARMOR = 100;
+	private static final int MANA_PER_DAMAGE_OLD_ARMOR = 70;
 
 	//Mana Item
 	public static final Item zadkiel = make(prefix(LibItemNames.ZADKIEL), new ZadkielItem(unstackable()));
@@ -112,32 +119,32 @@ public final class ExtraBotanyItems {
 
 	//Hammer
 	public static final Item manasteelHammer = make(prefix(LibItemNames.MANASTEEL_HAMMER),
-			new ManasteelHammerItem(HammerTiers.MANASTEEL, 6, -3.1F, unstackableCustomDamage()));
+			new ManasteelHammerItem(HammerTiers.MANASTEEL, 6, -3.1F, unstackableManaRepairable(MANA_PER_DAMAGE_MANASTEEL, 2 * MANA_PER_DAMAGE_MANASTEEL)));
 	public static final Item elementiumHammer = make(prefix(LibItemNames.ELEMENTIUM_HAMMER),
-			new ElementiumHammerItem(HammerTiers.ELEMENTIUM, 6, -3.1F, unstackableCustomDamage()));
+			new ElementiumHammerItem(HammerTiers.ELEMENTIUM, 6, -3.1F, unstackableManaRepairable(MANA_PER_DAMAGE_ELEMENTIUM, 2 * MANA_PER_DAMAGE_MANASTEEL)));
 	public static final Item terrasteelHammer = make(prefix(LibItemNames.TERRASTEEL_HAMMER),
-			new TerrasteelHammerItem(HammerTiers.TERRASTEEL, 5, -3.0F, unstackableCustomDamage().rarity(Rarity.UNCOMMON)));
+			new TerrasteelHammerItem(HammerTiers.TERRASTEEL, 5, -3.0F, unstackableManaRepairable(MANA_PER_DAMAGE_TERRASTEEL, 2 * MANA_PER_DAMAGE_MANASTEEL).rarity(Rarity.UNCOMMON)));
 	public static final Item gaiaHammer = make(prefix(LibItemNames.GAIA_HAMMER),
-			new GaiaHammerItem(HammerTiers.GAIA, 5, -3.0F, unstackableCustomDamage().rarity(Rarity.UNCOMMON).fireResistant()));
+			new GaiaHammerItem(HammerTiers.GAIA, 5, -3.0F, unstackableManaRepairable(MANA_PER_DAMAGE_GAIA, 2 * MANA_PER_DAMAGE_MANASTEEL).rarity(Rarity.UNCOMMON).fireResistant()));
 	public static final Item photoniumHammer = make(prefix(LibItemNames.PHOTONIUM_HAMMER),
-			new PhotoniumHammerItem(HammerTiers.PHOTONIUM, 6, -3.1F, unstackableCustomDamage()));
+			new PhotoniumHammerItem(HammerTiers.PHOTONIUM, 6, -3.1F, unstackableManaRepairable(MANA_PER_DAMAGE_MANASTEEL, 2 * MANA_PER_DAMAGE_MANASTEEL)));
 	public static final Item shadowiumHammer = make(prefix(LibItemNames.SHADOWIUM_HAMMER),
-			new ShadowiumHammerItem(HammerTiers.SHADOWIUM, 6, -3.1F, unstackableCustomDamage()));
+			new ShadowiumHammerItem(HammerTiers.SHADOWIUM, 6, -3.1F, unstackableManaRepairable(MANA_PER_DAMAGE_MANASTEEL, 2 * MANA_PER_DAMAGE_MANASTEEL)));
 	public static final Item aerialiteHammer = make(prefix(LibItemNames.AERIALITE_HAMMER),
-			new AerialiteHammerItem(HammerTiers.AERIALITE, 5, -3.0F, unstackableCustomDamage().rarity(Rarity.UNCOMMON)));
+			new AerialiteHammerItem(HammerTiers.AERIALITE, 5, -3.0F, unstackableManaRepairable(MANA_PER_DAMAGE_ELEMENTIUM, 2 * MANA_PER_DAMAGE_MANASTEEL).rarity(Rarity.UNCOMMON)));
 	public static final Item orichalcosHammer = make(prefix(LibItemNames.ORICHALCOS_HAMMER),
-			new OrichalcosHammer(HammerTiers.ORICHALCOS, 5, -3.0F, unstackableCustomDamage().rarity(Rarity.EPIC).fireResistant()));
+			new OrichalcosHammer(HammerTiers.ORICHALCOS, 5, -3.0F, unstackableManaRepairable(MANA_PER_DAMAGE_GAIA, 2 * MANA_PER_DAMAGE_MANASTEEL).rarity(Rarity.EPIC).fireResistant()));
 	public static final Item rheinHammer = make(prefix(LibItemNames.RHEIN_HAMMER),
-			new RheinHammerItem(unstackableCustomDamage().rarity(Rarity.EPIC).fireResistant()));
+			new RheinHammerItem(unstackableManaRepairable(MANA_PER_DAMAGE_RHEIN, 2 * MANA_PER_DAMAGE_MANASTEEL).rarity(Rarity.EPIC).fireResistant()));
 	//Shield
 	public static final Item manasteelShield = make(prefix(LibItemNames.MANASTEEL_SHIELD),
-			new ManasteelShieldItem(unstackableCustomDamage()));
+			new ManasteelShieldItem(unstackableManaRepairable(MANA_PER_DAMAGE_MANASTEEL, MANA_PER_DAMAGE_MANASTEEL)));
 	public static final Item elementiumShield = make(prefix(LibItemNames.ELEMENTIUM_SHIELD),
-			new ElementiumShieldItem(unstackableCustomDamage()));
+			new ElementiumShieldItem(unstackableManaRepairable(MANA_PER_DAMAGE_ELEMENTIUM, MANA_PER_DAMAGE_ELEMENTIUM)));
 	public static final Item terrasteelShield = make(prefix(LibItemNames.TERRASTEEL_SHIELD),
-			new TerrasteelShieldItem(unstackableCustomDamage().rarity(Rarity.UNCOMMON)));
+			new TerrasteelShieldItem(unstackableManaRepairable(MANA_PER_DAMAGE_MANASTEEL, MANA_PER_DAMAGE_MANASTEEL).rarity(Rarity.UNCOMMON)));
 	public static final Item achillesShield = make(prefix(LibItemNames.ACHILLES_SHIELD),
-			new AchillesShieldItem(unstackableCustomDamage().rarity(Rarity.EPIC).fireResistant()));
+			new AchillesShieldItem(unstackableManaRepairable(MANA_PER_DAMAGE_MANASTEEL, MANA_PER_DAMAGE_MANASTEEL).rarity(Rarity.EPIC).fireResistant()));
 
 	//Armor
 	public static final Item starryIdolHeadgear = make(prefix(LibItemNames.STARRY_IDOL_HEADGEAR),
@@ -179,36 +186,36 @@ public final class ExtraBotanyItems {
 			new ShadowWarriorArmorItem(ArmorItem.Type.BOOTS, armorProps(ArmorItem.Type.BOOTS, 23)));
 
 	public static final Item mikuHelm = make(prefix(LibItemNames.MIKU_HELM),
-			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.MIKU, ArmorItem.Type.HELMET, armorProps(ArmorItem.Type.HELMET, 5)));
+			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.MIKU, ArmorItem.Type.HELMET, oldArmorProps(ArmorItem.Type.HELMET, 5)));
 	public static final Item mikuChest = make(prefix(LibItemNames.MIKU_CHEST),
-			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.MIKU, ArmorItem.Type.CHESTPLATE, armorProps(ArmorItem.Type.CHESTPLATE, 5)));
+			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.MIKU, ArmorItem.Type.CHESTPLATE, oldArmorProps(ArmorItem.Type.CHESTPLATE, 5)));
 	public static final Item mikuLegs = make(prefix(LibItemNames.MIKU_LEGS),
-			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.MIKU, ArmorItem.Type.LEGGINGS, armorProps(ArmorItem.Type.LEGGINGS, 5)));
+			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.MIKU, ArmorItem.Type.LEGGINGS, oldArmorProps(ArmorItem.Type.LEGGINGS, 5)));
 	public static final Item mikuBoots = make(prefix(LibItemNames.MIKU_BOOTS),
-			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.MIKU, ArmorItem.Type.BOOTS, armorProps(ArmorItem.Type.BOOTS, 5)));
+			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.MIKU, ArmorItem.Type.BOOTS, oldArmorProps(ArmorItem.Type.BOOTS, 5)));
 
 	public static final Item shootingGuardianHelm = make(prefix(LibItemNames.SHOOTING_GUARDIAN_HELM),
-			new ShootingGuardianArmorItem(ArmorItem.Type.HELMET, armorProps(ArmorItem.Type.HELMET, 34)));
+			new ShootingGuardianArmorItem(ArmorItem.Type.HELMET, oldArmorProps(ArmorItem.Type.HELMET, 34)));
 	public static final Item shootingGuardianChest = make(prefix(LibItemNames.SHOOTING_GUARDIAN_CHEST),
-			new ShootingGuardianArmorItem(ArmorItem.Type.CHESTPLATE, armorProps(ArmorItem.Type.CHESTPLATE, 34)));
+			new ShootingGuardianArmorItem(ArmorItem.Type.CHESTPLATE, oldArmorProps(ArmorItem.Type.CHESTPLATE, 34)));
 	public static final Item shootingGuardianLegs = make(prefix(LibItemNames.SHOOTING_GUARDIAN_LEGS),
-			new ShootingGuardianArmorItem(ArmorItem.Type.LEGGINGS, armorProps(ArmorItem.Type.LEGGINGS, 34)));
+			new ShootingGuardianArmorItem(ArmorItem.Type.LEGGINGS, oldArmorProps(ArmorItem.Type.LEGGINGS, 34)));
 	public static final Item shootingGuardianBoots = make(prefix(LibItemNames.SHOOTING_GUARDIAN_BOOTS),
-			new ShootingGuardianArmorItem(ArmorItem.Type.BOOTS, armorProps(ArmorItem.Type.BOOTS, 34)));
+			new ShootingGuardianArmorItem(ArmorItem.Type.BOOTS, oldArmorProps(ArmorItem.Type.BOOTS, 34)));
 
 	public static final Item silentSagesHelm = make(prefix(LibItemNames.SILENT_SAGES_HELM),
-			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.SILENT_SAGES, ArmorItem.Type.HELMET, armorProps(ArmorItem.Type.HELMET, 50)));
+			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.SILENT_SAGES, ArmorItem.Type.HELMET, oldArmorProps(ArmorItem.Type.HELMET, 50)));
 	public static final Item silentSagesChest = make(prefix(LibItemNames.SILENT_SAGES_CHEST),
-			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.SILENT_SAGES, ArmorItem.Type.CHESTPLATE, armorProps(ArmorItem.Type.CHESTPLATE, 50)));
+			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.SILENT_SAGES, ArmorItem.Type.CHESTPLATE, oldArmorProps(ArmorItem.Type.CHESTPLATE, 50)));
 	public static final Item silentSagesLegs = make(prefix(LibItemNames.SILENT_SAGES_LEGS),
-			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.SILENT_SAGES, ArmorItem.Type.LEGGINGS, armorProps(ArmorItem.Type.LEGGINGS, 50)));
+			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.SILENT_SAGES, ArmorItem.Type.LEGGINGS, oldArmorProps(ArmorItem.Type.LEGGINGS, 50)));
 	public static final Item silentSagesBoots = make(prefix(LibItemNames.SILENT_SAGES_BOOTS),
-			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.SILENT_SAGES, ArmorItem.Type.BOOTS, armorProps(ArmorItem.Type.BOOTS, 50)));
+			new OldExbotanyArmorItem(OldExbotanyArmorItem.Variant.SILENT_SAGES, ArmorItem.Type.BOOTS, oldArmorProps(ArmorItem.Type.BOOTS, 50)));
 
 	//Relic
 	public static final Item camera = make(prefix(LibItemNames.CAMERA), new CameraItem(unstackable().rarity(Rarity.UNCOMMON).fireResistant()));
 	public static final Item failnaught = make(prefix(LibItemNames.FAILNAUGHT), new FailnaughtItem(unstackable().rarity(Rarity.UNCOMMON).fireResistant()));
-	public static final Item excalibur = make(prefix(LibItemNames.EXCALIBUR), new ExcaliburItem(unstackable().rarity(Rarity.UNCOMMON).fireResistant()));
+	public static final Item excalibur = make(prefix(LibItemNames.EXCALIBUR), new ExcaliburItem(manaRepairable(MANA_PER_DAMAGE_GAIA).rarity(Rarity.UNCOMMON).fireResistant()));
 	public static final Item trueTerrablade = make(prefix(LibItemNames.TRUE_TERRABLADE), new TrueTerrabladeItem(unstackable().rarity(Rarity.EPIC).fireResistant()));
 	public static final Item trueShadowKatana = make(prefix(LibItemNames.TRUE_SHADOW_KATANA), new TrueShadowKatanaItem(unstackable().rarity(Rarity.EPIC).fireResistant()));
 	public static final Item influxWaver = make(prefix(LibItemNames.INFLUX_WAVER), new InfluxWaverItem(unstackable().rarity(Rarity.EPIC).fireResistant()));
@@ -248,12 +255,12 @@ public final class ExtraBotanyItems {
 	public static final Item manaDrink = make(prefix(LibItemNames.MANA_DRINK), new ManaDrinkItem(defaultBuilder()
 			.food(new FoodProperties.Builder().nutrition(0).saturationModifier(0F).alwaysEdible().build())));
 	public static final Item friedChicken = make(prefix(LibItemNames.FRIED_CHICKEN), new Item(defaultBuilder()
-					.food(new FoodProperties.Builder()
-							.nutrition(8)
-							.saturationModifier(0.5F)
-							.alwaysEdible()
-							.build()
-					)
+			.food(new FoodProperties.Builder()
+					.nutrition(8)
+					.saturationModifier(0.5F)
+					.alwaysEdible()
+					.build()
+			)
 	));
 	public static final Item heroMedal = make(prefix(LibItemNames.HERO_MEDAL), new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));//OT
 	public static final Item challengeTicket = make(prefix(LibItemNames.CHALLENGE_TICKET), new ChallangeTicketItem(defaultBuilder()));
@@ -430,7 +437,7 @@ public final class ExtraBotanyItems {
 	}
 
 	public static Item.Properties defaultBuilderCustomDamage() {
-		return XplatAbstractions.INSTANCE.defaultItemBuilderWithCustomDamageOnFabric();
+		return defaultBuilder();
 	}
 
 	public static Item.Properties unstackableCustomDamage() {
@@ -438,11 +445,28 @@ public final class ExtraBotanyItems {
 	}
 
 	public static Item.Properties armorProps(ArmorItem.Type type, int durabilityMultiplier) {
-		return unstackableCustomDamage().durability(type.getDurability(durabilityMultiplier));
+		return manaRepairable(MANA_PER_DAMAGE_ARMOR, MANA_PER_DAMAGE_ARMOR).durability(type.getDurability(durabilityMultiplier));
+	}
+
+	public static Item.Properties oldArmorProps(ArmorItem.Type type, int durabilityMultiplier) {
+		return manaRepairable(MANA_PER_DAMAGE_OLD_ARMOR, 2 * MANA_PER_DAMAGE_OLD_ARMOR).durability(type.getDurability(durabilityMultiplier));
 	}
 
 	public static Item.Properties defaultBuilder() {
-		return XplatAbstractions.INSTANCE.defaultItemBuilder();
+		return new Item.Properties();
+	}
+
+	public static Item.Properties manaRepairable(int manaPerDamage) {
+		return manaRepairable(manaPerDamage, 2 * manaPerDamage);
+	}
+
+	public static Item.Properties manaRepairable(int manaPerDamage, int manaPerRepair) {
+		return defaultBuilder()
+				.component(BotaniaDataComponents.MANA_REPAIR, new ManaRepair(manaPerDamage, manaPerRepair));
+	}
+
+	private static Item.Properties unstackableManaRepairable(int manaPerDamage, int manaPerRepair) {
+		return manaRepairable(manaPerDamage, manaPerRepair).stacksTo(1);
 	}
 
 	private static Item.Properties stackTo16() {

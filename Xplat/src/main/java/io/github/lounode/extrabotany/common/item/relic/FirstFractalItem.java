@@ -57,7 +57,7 @@ public class FirstFractalItem extends OldExbotanyRelicSwordItem {
 
 		Vec3 start = randomStart(player, targetPos, angle);
 		player.level().addFreshEntity(new PhantomSwordEntity(player.level(), player, start, targetPos, 0, 9));
-		player.level().playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.terraBlade, SoundSource.PLAYERS, 0.4F, 1.4F);
+		player.level().playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.TERRABLADE, SoundSource.PLAYERS, 0.4F, 1.4F);
 	}
 
 	private Vec3 randomStart(Player player, Vec3 targetPos, double angle) {

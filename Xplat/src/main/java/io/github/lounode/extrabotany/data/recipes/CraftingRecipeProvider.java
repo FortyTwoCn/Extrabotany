@@ -3,9 +3,9 @@ package io.github.lounode.extrabotany.data.recipes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
@@ -15,10 +15,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -26,12 +26,12 @@ import net.minecraft.world.level.block.Block;
 import vazkii.botania.common.block.BotaniaBlocks;
 import vazkii.botania.common.block.flower.FloatingSpecialFlowerBlock;
 import vazkii.botania.common.crafting.recipe.ManaUpgradeRecipe;
+import vazkii.botania.common.crafting.recipe.WrappingRecipeSerializer;
 import vazkii.botania.common.item.BotaniaItems;
 import vazkii.botania.common.lib.BotaniaTags;
 import vazkii.botania.common.lib.ConventionalBotaniaTags;
 import vazkii.botania.common.lib.LibBlockNames;
 import vazkii.botania.data.recipes.builder.CapturingRecipeOutput;
-import vazkii.botania.common.crafting.recipe.WrappingRecipeSerializer;
 import vazkii.botania.data.recipes.builder.WrapperRecipeBuilder;
 
 import io.github.lounode.extrabotany.common.block.ExtraBotanyBlocks;
@@ -226,7 +226,7 @@ public class CraftingRecipeProvider extends ExtraBotanyRecipeProvider {
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ExtraBotanyItems.cosmicCarKey)
 				.define('M', ConventionalBotaniaTags.Items.MANASTEEL_INGOTS)
 				.define('T', ExtraBotanyItems.theOrigin)
-				.define('E', BotaniaItems.ENDER_AIR_BOTTLE)
+				.define('E', BotaniaItems.PURE_ENDER_ESSENCE)
 				.define('P', Items.ENDER_EYE)
 				.pattern("EPE")
 				.pattern("MTM")

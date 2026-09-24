@@ -14,10 +14,10 @@ import vazkii.botania.api.block_entity.FunctionalFlowerBlockEntity;
 import vazkii.botania.api.block_entity.GeneratingFlowerBlockEntity;
 import vazkii.botania.api.mana.ManaReceiver;
 import vazkii.botania.common.handler.BotaniaSounds;
-import io.github.lounode.extrabotany.common.util.ItemStackDataHelper;
 import vazkii.botania.common.helper.PlayerHelper;
 
 import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
+import io.github.lounode.extrabotany.common.util.ItemStackDataHelper;
 import io.github.lounode.extrabotany.network.clientbound.ManaReaderPacket;
 import io.github.lounode.extrabotany.xplat.EXplatAbstractions;
 
@@ -43,7 +43,7 @@ public class ManaReaderItem extends Item {
 			return InteractionResult.PASS;
 		}
 		if (world.isClientSide) {
-			player.playSound(BotaniaSounds.ding, 0.6F, 0.1F + world.random.nextFloat() * 0.5F);
+			player.playSound(BotaniaSounds.DING, 0.6F, 0.1F + world.random.nextFloat() * 0.5F);
 			return InteractionResult.SUCCESS;
 		}
 

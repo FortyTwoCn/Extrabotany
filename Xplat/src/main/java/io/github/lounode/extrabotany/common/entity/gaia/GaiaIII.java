@@ -138,7 +138,7 @@ public class GaiaIII extends Gaia {
 			gaia.getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HP * healthMultiplier);
 			gaia.getAttribute(Attributes.ARMOR).setBaseValue(30);
 
-			gaia.playSound(BotaniaSounds.gaiaSummon, 0.05F, 1F);
+			gaia.playSound(BotaniaSounds.GAIA_SUMMON, 0.05F, 1F);
 			gaia.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(gaia.blockPosition()), MobSpawnType.EVENT, null);
 			world.addFreshEntity(gaia);
 
@@ -336,7 +336,7 @@ public class GaiaIII extends Gaia {
 		setEgoStage(0);
 		setEgoFlicker(0);
 		flickerCooldown = FLICKER_INTERVAL;
-		playSound(BotaniaSounds.gaiaSummon, 1F, 0.6F);
+		playSound(BotaniaSounds.GAIA_SUMMON, 1F, 0.6F);
 	}
 
 	private void tickFlicker() {
@@ -362,7 +362,7 @@ public class GaiaIII extends Gaia {
 		fogWaveIndex = 0;
 		fogWaveTimer = 0;
 		setInvulTime(FOG_WAVE_COUNT * FOG_WAVE_INTERVAL + 70);
-		playSound(BotaniaSounds.gaiaSummon, 1F, 0.8F);
+		playSound(BotaniaSounds.GAIA_SUMMON, 1F, 0.8F);
 	}
 
 	private void tickFogBarrage() {
@@ -473,7 +473,7 @@ public class GaiaIII extends Gaia {
 				type++;
 			}
 		}
-		playSound(BotaniaSounds.gaiaSummon, 1F, 0.7F);
+		playSound(BotaniaSounds.GAIA_SUMMON, 1F, 0.7F);
 	}
 
 	private void tickMinionPhase() {

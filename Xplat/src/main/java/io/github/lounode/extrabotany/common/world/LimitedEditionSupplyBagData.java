@@ -31,7 +31,7 @@ public class LimitedEditionSupplyBagData extends SavedData {
 	private static final int EMPTY = -1;
 	private static final int[] TEMPLATE = createTemplate();
 	private static final SavedData.Factory<LimitedEditionSupplyBagData> FACTORY =
-			new SavedData.Factory<LimitedEditionSupplyBagData>(
+			new SavedData.Factory<>(
 					() -> new LimitedEditionSupplyBagData(),
 					(tag, registries) -> LimitedEditionSupplyBagData.load(tag, registries),
 					null);

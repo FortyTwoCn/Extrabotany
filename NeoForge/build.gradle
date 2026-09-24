@@ -53,10 +53,16 @@ repositories {
     maven {
         name = "lounodeSnapshots"
         url = "https://maven.lounode.top/snapshots"
+        content {
+            includeGroup "vazkii.botania"
+        }
     }
     maven {
         name = "lounodeReleases"
         url = "https://maven.lounode.top/releases"
+        content {
+            includeGroup "vazkii.botania"
+        }
     }
     maven {
         name = "kubejs"

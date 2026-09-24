@@ -6,14 +6,15 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -33,7 +34,6 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -41,14 +41,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.Nullable;
 
-import vazkii.botania.common.helper.PlayerHelper;
 import vazkii.botania.common.handler.BotaniaSounds;
+import vazkii.botania.common.helper.PlayerHelper;
 
 import io.github.lounode.extrabotany.api.gaia.GaiaArena;
 import io.github.lounode.extrabotany.common.bossevents.ServerGaiaBossEvent;
@@ -60,13 +58,10 @@ import io.github.lounode.extrabotany.common.sounds.ExtraBotanySounds;
 import io.github.lounode.extrabotany.common.util.HerrscherCombatHelper;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
-import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
 
 public class VoidHerrscher extends Gaia {
 	public static final float ARENA_RANGE = 15F;
@@ -455,7 +450,7 @@ public class VoidHerrscher extends Gaia {
 		}
 		missile.setPos(getX() + (random.nextDouble() - 0.5D) * 0.1D, getY() + 1.8D + (random.nextDouble() - 0.5D) * 0.1D, getZ() + (random.nextDouble() - 0.5D) * 0.1D);
 		if (missile.findTarget()) {
-			playSound(BotaniaSounds.missile, 0.6F, 0.8F + random.nextFloat() * 0.2F);
+			playSound(BotaniaSounds.MISSILE, 0.6F, 0.8F + random.nextFloat() * 0.2F);
 			level().addFreshEntity(missile);
 		}
 	}
@@ -544,7 +539,8 @@ public class VoidHerrscher extends Gaia {
 				applyCandy(player, variant);
 				applyCandy(player, variant);
 			}
-			default -> {}
+			default -> {
+			}
 		}
 		player.sendSystemMessage(Component.translatable("extrabotany.message.herrscher.support" + effect + variant, supporter).withStyle(ChatFormatting.AQUA));
 	}

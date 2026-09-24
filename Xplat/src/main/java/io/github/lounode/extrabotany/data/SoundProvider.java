@@ -1,7 +1,7 @@
 package io.github.lounode.extrabotany.data;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -55,7 +55,7 @@ public class SoundProvider extends SoundDefinitionsProvider {
 		this.add(EXCALIBUR_ATTACK, SoundDefinitionsProvider.definition()
 				.subtitle(title(EXCALIBUR_ATTACK))
 				.with(
-						SoundDefinitionsProvider.sound(BotaniaSounds.terraBlade.getLocation())
+						SoundDefinitionsProvider.sound(BotaniaSounds.TERRABLADE.getLocation())
 								.volume(0.4f)
 								.pitch(1.4f)
 				)
@@ -64,7 +64,7 @@ public class SoundProvider extends SoundDefinitionsProvider {
 		this.add(FAILNAUGHT_SHOOT, SoundDefinitionsProvider.definition()
 				.subtitle(title(FAILNAUGHT_SHOOT))
 				.with(
-						SoundDefinitionsProvider.sound(BotaniaSounds.terraBlade.getLocation())
+						SoundDefinitionsProvider.sound(BotaniaSounds.TERRABLADE.getLocation())
 								.volume(0.4f)
 								.pitch(1.4f)
 				)
@@ -119,7 +119,7 @@ public class SoundProvider extends SoundDefinitionsProvider {
 		this.add(ARMOR_EQUIP_MAID, SoundDefinition.definition()
 				.subtitle(title(ARMOR_EQUIP_MAID))
 				.with(
-						SoundDefinitionsProvider.sound(location(BotaniaSounds.equipManaweave), SoundDefinition.SoundType.EVENT)
+						SoundDefinitionsProvider.sound(location(BotaniaSounds.EQUIP_MANAWEAVE), SoundDefinition.SoundType.EVENT)
 				)
 		);
 
@@ -127,7 +127,7 @@ public class SoundProvider extends SoundDefinitionsProvider {
 		this.add(ARMOR_EQUIP_IDOL, SoundDefinition.definition()
 				.subtitle(title(ARMOR_EQUIP_IDOL))
 				.with(
-						SoundDefinitionsProvider.sound(location(BotaniaSounds.equipManaweave), SoundDefinition.SoundType.EVENT)
+						SoundDefinitionsProvider.sound(location(BotaniaSounds.EQUIP_MANAWEAVE), SoundDefinition.SoundType.EVENT)
 				)
 		);
 
@@ -135,7 +135,7 @@ public class SoundProvider extends SoundDefinitionsProvider {
 		this.add(HAMMER_USE, SoundDefinition.definition()
 				.subtitle(title(HAMMER_USE))
 				.with(
-						SoundDefinitionsProvider.sound(BotaniaSounds.terraPickMode.getLocation(), SoundDefinition.SoundType.EVENT)
+						SoundDefinitionsProvider.sound(BotaniaSounds.TERRA_SHATTERER_MODE.getLocation(), SoundDefinition.SoundType.EVENT)
 				)
 		);
 		take(soundEvents, ARMOR_EQUIP_GOBLIN);

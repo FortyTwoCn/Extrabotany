@@ -15,6 +15,13 @@ repositories {
         url = "https://maven.blamejared.com/"
     }
     maven {
+        name = "C4"
+        url = "https://maven.theillusivec4.top/"
+        content {
+            includeGroup "top.theillusivec4.curios"
+        }
+    }
+    maven {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/" // for emi
     }
@@ -31,10 +38,16 @@ repositories {
     maven {
         name = "lounode"
         url = "https://maven.lounode.top/snapshots"
+        content {
+            includeGroup "vazkii.botania"
+        }
     }
     maven {
         name = "lounode"
         url = "https://maven.lounode.top/releases"
+        content {
+            includeGroup "vazkii.botania"
+        }
     }
     maven {
         name = "kubejs"

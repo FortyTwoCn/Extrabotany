@@ -162,7 +162,7 @@ public class Gaia extends Monster {
 			gaia.getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HP * healthMultiplier);
 			gaia.getAttribute(Attributes.ARMOR).setBaseValue(15);
 
-			gaia.playSound(BotaniaSounds.gaiaSummon, .1F, 1F);
+			gaia.playSound(BotaniaSounds.GAIA_SUMMON, .1F, 1F);
 			gaia.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(gaia.blockPosition()), MobSpawnType.EVENT, null);
 			world.addFreshEntity(gaia);
 
@@ -259,7 +259,6 @@ public class Gaia extends Monster {
 		}
 	}
 
-	///
 	@Override
 	public boolean hurt(@NotNull DamageSource source, float amount) {
 		if (source.is(DamageTypes.GENERIC_KILL)) {
@@ -321,7 +320,7 @@ public class Gaia extends Monster {
 			}
 		}
 
-		playSound(BotaniaSounds.gaiaDeath, 1F, (1F + (level().random.nextFloat() - level().random.nextFloat()) * 0.2F) * 0.7F);
+		playSound(BotaniaSounds.GAIA_DEATH, 1F, (1F + (level().random.nextFloat() - level().random.nextFloat()) * 0.2F) * 0.7F);
 		level().addParticle(ParticleTypes.EXPLOSION_EMITTER, getX(), getY(), getZ(), 1D, 0D, 0D);
 	}
 
@@ -353,7 +352,6 @@ public class Gaia extends Monster {
 		//trueKiller = null;
 	}
 
-	///
 	@Override
 	protected float getDamageAfterArmorAbsorb(DamageSource source, float damage) {
 		return super.getDamageAfterArmorAbsorb(source, Math.min(DAMAGE_CAP, damage));
@@ -644,7 +642,7 @@ public class Gaia extends Monster {
 
 	/// Music
 	public SoundEvent getBGM() {
-		return BotaniaSounds.musicGaiaBoss2.value();
+		return BotaniaSounds.MUSIC_GAIA_BOSS_2.value();
 	}
 
 	@Nullable

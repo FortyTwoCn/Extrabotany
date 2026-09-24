@@ -67,7 +67,7 @@ public class MagicLandMineEntity extends Entity {
 		explodeParticle();
 
 		if (!level().isClientSide()) {
-			level().playSound(null, getX(), getY(), getZ(), BotaniaSounds.gaiaTrap, SoundSource.NEUTRAL, 1F, 1F);
+			level().playSound(null, getX(), getY(), getZ(), BotaniaSounds.GAIA_TRAP, SoundSource.NEUTRAL, 1F, 1F);
 
 			List<Player> players = getVictimPlayers();
 			for (Player player : players) {

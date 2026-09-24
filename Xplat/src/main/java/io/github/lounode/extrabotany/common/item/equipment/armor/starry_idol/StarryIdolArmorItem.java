@@ -9,33 +9,26 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
-import org.jetbrains.annotations.Nullable;
-
 import vazkii.botania.api.item.PhantomInkable;
 import vazkii.botania.client.gui.TooltipHandler;
-import vazkii.botania.common.annotations.SoftImplement;
-import io.github.lounode.extrabotany.common.util.ItemStackDataHelper;
 import vazkii.botania.common.item.CustomCreativeTabContents;
-import vazkii.botania.common.item.equipment.tool.ToolCommons;
 
 import io.github.lounode.extrabotany.api.ExtraBotanyAPI;
 import io.github.lounode.extrabotany.api.client.IArmor;
 import io.github.lounode.extrabotany.api.item.ArmorSet;
-import io.github.lounode.extrabotany.api.item.ManaFixableItem;
 import io.github.lounode.extrabotany.client.lib.ResourcesLib;
 import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
+import io.github.lounode.extrabotany.common.util.ItemStackDataHelper;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class StarryIdolArmorItem extends ArmorItem implements CustomCreativeTabContents,
-		ManaFixableItem, IArmor, ArmorSet, PhantomInkable {
+		IArmor, ArmorSet, PhantomInkable {
 
 	private static final String TAG_PHANTOM_INK = "phantomInk";
 	private static final int MANA_PER_DAMAGE = 100;
@@ -55,15 +48,9 @@ public class StarryIdolArmorItem extends ArmorItem implements CustomCreativeTabC
 		super(material, type, properties);
 	}
 
-	@SoftImplement("IForgeItem")
-	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<Item> onBroken) {
-		return ToolCommons.damageItemIfPossible(stack, amount, entity, getManaPerDamage());
-	}
-
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
 		triggerAdvancement(entity);
-		tickManaFix(stack, world, entity, slot, selected);
 	}
 
 	@Override
@@ -124,7 +111,6 @@ public class StarryIdolArmorItem extends ArmorItem implements CustomCreativeTabC
 		return ARMOR_SET.get();
 	}
 
-	@Override
 	public int getManaPerDamage() {
 		return MANA_PER_DAMAGE;
 	}
